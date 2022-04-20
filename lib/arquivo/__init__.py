@@ -62,6 +62,35 @@ def verificarExistencia(palavra, arch):
         return False
 
 
+def excluirPalavra(arquivo):
+    validos = ascii_lowercase + ' a_'
+
+    while True:
+        word = input(
+            f'{ciano}Palavra p/ excluir{original}: ').replace(' ', '_')
+
+        if all(c in validos for c in word):
+            if verificarExistencia(word, arquivo):
+                try:
+                    with open(arquivo, 'r') as a:
+                        linhas = a.readlines()
+
+                        with open(arquivo, 'w') as aw:
+                            for linha in linhas:
+                                if linha.strip('\n') != word:
+                                    aw.write(linha)
+                    print('excluído')
+                    break
+                except Exception as e:
+                    print(f'erro {e}')
+                else:
+                    print()
+            else:
+                print('palavra não registrada')
+        else:
+            print('palavra inválida')
+
+
 def header(msg):
     print('-'*42)
     print(f'{msg}'.center(42))
@@ -72,6 +101,14 @@ def palavrasRegistradas(arquivo):
     a = open(arquivo, 'rt')
     lista = a.readlines()
     palavras = list()
+    print(f'{vermelho}o{ciano}i{original}')
+    header("PALAVRAS REGISTRDAS")
     for i, v in enumerate(lista):
-        p = v.replace('\n', '').replace('_', ' ')
-        print(p)
+        if ((i+1) % 2) == 0:
+            p = v.replace('\n', '').replace('_', ' ')
+            print(f'{vermelho}{p}{original}')
+        else:
+            p = v.replace('\n', '').replace('_', ' ')
+            print(f'{ciano}{p}{original}')
+
+    print('-'*42)

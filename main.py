@@ -37,7 +37,7 @@ while True:
             elif opt == 2:
                 arquivo.palavrasRegistradas(config)
             elif opt == 3:
-                print()
+                arquivo.excluirPalavra(config)
             elif opt == 4:
                 print(f'{arquivo.ciano}saindo{arquivo.original}')
                 break
