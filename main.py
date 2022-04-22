@@ -1,18 +1,27 @@
 from string import ascii_letters
 from lib import arquivo
 import time
+from os import system
 
 config = 'config.txt'
 score = 'score.txt'
 
+# function to clear terminal
+
+
+def clear(): return system('cls')
+
+
+# check if config and score exist
 if not arquivo.arquivoExiste(config):
     arquivo.arquivoCriar(config)
 
 if not arquivo.arquivoExiste(score):
     arquivo.arquivoCriar(score)
 
-
+# start menus and functionalities
 while True:
+    clear()
     print('-'*42)
     print('JOGO DA FORCA'.center(42))
     print('-'*42)
