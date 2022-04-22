@@ -101,7 +101,7 @@ def palavrasRegistradas(arquivo):
     a = open(arquivo, 'rt')
     lista = a.readlines()
     palavras = list()
-    print(f'{vermelho}o{ciano}i{original}')
+
     header("PALAVRAS REGISTRDAS")
     for i, v in enumerate(lista):
         if ((i+1) % 2) == 0:
