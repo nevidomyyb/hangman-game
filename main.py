@@ -1,7 +1,7 @@
-from string import ascii_letters
 from lib import arquivo
-import time
+from lib import game
 from os import system
+import time
 
 config = 'config.txt'
 score = 'score.txt'
@@ -19,9 +19,11 @@ if not arquivo.arquivoExiste(config):
 if not arquivo.arquivoExiste(score):
     arquivo.arquivoCriar(score)
 
+game.listarPalavras(config)
+
 # start menus and functionalities
 while True:
-    clear()
+    # clear()
     print('-'*42)
     print('JOGO DA FORCA'.center(42))
     print('-'*42)
