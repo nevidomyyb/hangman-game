@@ -19,7 +19,6 @@ if not arquivo.arquivoExiste(config):
 if not arquivo.arquivoExiste(score):
     arquivo.arquivoCriar(score)
 
-game.listarPalavras(config)
 
 # start menus and functionalities
 while True:
