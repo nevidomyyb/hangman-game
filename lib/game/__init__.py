@@ -2,6 +2,8 @@ import random
 from lib import arquivo
 from string import ascii_lowercase
 
+validos = ascii_lowercase + ' a'
+
 
 def escolherPalavra(arquivo):
     # system to pick a word from config.txt
@@ -15,51 +17,45 @@ def escolherPalavra(arquivo):
     return choice
 
 
+def letra():
+    while True:
+        chute = str(input('Qual letra você chutará? '))
+        if len(chute) > 1:
+            print('Apenas uma letra por vez!')
+        elif chute not in validos:
+            print('Essa letra não é valida')
+        else:
+            break
+    return chute
+
+
+def criarTraços(dicionario, tamtam):
+    for c in range(0, tamtam):
+        dicionario[c] = '_'
+
+
+def mostrarTraços(dicionario):
+    for c in dicionario.values():
+        print(f'{c}', end=' ')
+    print()
+
+
 def startGame(arquivo):
     # start the game
-    validos = ascii_lowercase + ' a'
-    acertos = list()
-    pos = list()
-    dicti = dict()
     escolha = escolherPalavra(arquivo)
-    escolhaS = escolha
+    dicti = dict()
+    acertos = list()
 
     if escolha.count(' ') > 0:
         tamanho = len(escolha) - escolha.count(' ')
     else:
         tamanho = len(escolha)
-
-    for c in range(0, tamanho):
-        dicti[c] = '_'
+    criarTraços(dicti, tamanho)
 
     while True:
         if len(acertos) == 0:
-            for c in dicti.values():
-                print(c, end=' ')
-            print()
+            mostrarTraços(dicti)
+            chute = letra()
+            print(chute, type(chute))
         else:
             print()
-
-        while True:
-            chute = str(input('Digite a letra: '))
-            if len(chute) > 1:
-                print('Apenas uma letra é permitido')
-            elif chute not in validos:
-                print('Caractere inválido')
-            else:
-                break
-
-        if chute in escolha:
-            if chute in acertos:
-                print('Letra já encontrada')
-            else:
-                print('Letra encontrada!')
-                acertos.append(chute)
-        else:
-            print('Errou!')
-
-        print(dicti)
-        print(tamanho)
-        print(escolha)
-        print(escolhaS)
-        print(acertos)
