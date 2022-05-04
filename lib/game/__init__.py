@@ -19,7 +19,7 @@ def escolherPalavra(arquivo):
 
 def letra():
     while True:
-        chute = str(input('Qual letra você chutará? '))
+        chute = str(input('Digite uma letra: '))
         if len(chute) > 1:
             print('Apenas uma letra por vez!')
         elif chute not in validos:
@@ -55,7 +55,14 @@ def startGame(arquivo):
     while True:
         if len(acertos) == 0:
             mostrarTraços(dicti)
+        while True:
             chute = letra()
-            print(chute, type(chute))
-        else:
-            print()
+            if chute in escolha:
+                if chute in acertos:
+                    print('Letra já encontrada.')
+                else:
+                    print('Acertou!')
+                    acertos.append(chute)
+                    break
+            else:
+                print('Errou!')

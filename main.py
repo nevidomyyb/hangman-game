@@ -6,12 +6,6 @@ import time
 config = 'config.txt'
 score = 'score.txt'
 
-# function to clear terminal
-
-
-def clear(): return system('cls')
-
-
 # check if config and score exist
 if not arquivo.arquivoExiste(config):
     arquivo.arquivoCriar(config)
