@@ -46,15 +46,18 @@ def startGame(arquivo):
     dicti = dict()
     acertos = list()
 
+    #corrige ESPAÇOS e _ nas palavras
     if escolha.count(' ') > 0:
         tamanho = len(escolha) - escolha.count(' ')
     else:
         tamanho = len(escolha)
+
     criarTraços(dicti, tamanho)
 
     while True:
         if len(acertos) == 0:
             mostrarTraços(dicti)
+    
         while True:
             chute = letra()
             if chute in escolha:
@@ -66,3 +69,11 @@ def startGame(arquivo):
                     break
             else:
                 print('Errou!')
+
+        for LA in acertos:
+            if LA in escolha:
+                for pos, char in enumerate(escolha):
+                    if char == LA:
+                        dicti[pos] = LA 
+
+        mostrarTraços(dicti)
