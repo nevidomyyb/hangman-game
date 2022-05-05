@@ -6,7 +6,7 @@ import time
 config = 'config.txt'
 score = 'score.txt'
 
-# check if config and score exist
+# check if config and score exist if not create them
 if not arquivo.arquivoExiste(config):
     arquivo.arquivoCriar(config)
 
@@ -16,7 +16,7 @@ if not arquivo.arquivoExiste(score):
 
 # start menus and functionalities
 while True:
-    # clear()
+
     print('-'*42)
     print('JOGO DA FORCA'.center(42))
     print('-'*42)
