@@ -10,7 +10,7 @@ preto = '\033[30m'
 branco = '\033[37m'
 original = '\033[0;0m'
 
-
+#verifica se o arquivo existe
 def arquivoExiste(arquivo):
     try:
         a = open(arquivo, 'rt')
@@ -20,7 +20,7 @@ def arquivoExiste(arquivo):
     else:
         return True
 
-
+#cria um arquivo
 def arquivoCriar(arquivo):
     try:
         a = open(arquivo, 'wt+')
@@ -30,7 +30,7 @@ def arquivoCriar(arquivo):
         a.close()
         print(f'arquivo {arquivo} criado com sucesso')
 
-
+#registra palavras
 def registrarPalavra(arquivo):
     validos = ascii_lowercase + ' a_'
     try:
@@ -50,7 +50,7 @@ def registrarPalavra(arquivo):
             else:
                 print('palavra inválida')
 
-
+#verifica se a palavra ja existe no arquivo
 def verificarExistencia(palavra, arch):
     arch = open(arch, 'rt')
     lista = arch.readlines()
@@ -61,7 +61,7 @@ def verificarExistencia(palavra, arch):
     else:
         return False
 
-
+#exclue uma palavra de um arquivo
 def excluirPalavra(arquivo):
     validos = ascii_lowercase + ' a_'
 
@@ -90,13 +90,13 @@ def excluirPalavra(arquivo):
         else:
             print('palavra inválida')
 
-
+#cria cabeçalhos
 def header(msg):
     print('-'*42)
     print(f'{msg}'.center(42))
     print('-'*42)
 
-
+#cria uma lista com as palavras registradas
 def palavrasRegistradas(arquivo):
     a = open(arquivo, 'rt')
     lista = a.readlines()
