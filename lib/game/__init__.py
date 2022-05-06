@@ -45,7 +45,8 @@ def startGame(arquivo):
     escolha = escolherPalavra(arquivo)
     dicti = dict()
     acertos = list()
-
+    tentativas = list()
+    vida = 10
     #corrige ESPAÇOS e _ nas palavras
     if escolha.count(' ') > 0:
         tamanho = len(escolha) - escolha.count(' ')
@@ -56,25 +57,34 @@ def startGame(arquivo):
 
     #começa o sistema do jogo
     while True:
-        #se nenhuma letra foi acertada mostra os traços
-        if len(acertos) == 0:
+        if vida <= 0:
+            print('Você perdeu!')
+            break
+        else:
             mostrarTraços(dicti)
-        #recebe a letra digitada, verifica ]///se já foi encontrada e se é correta para a palavra.
-        while True:
-            chute = letra()
-            if chute in escolha:
-                if chute in acertos:
-                    print('Letra já encontrada.')
+            #recebe a letra digitada, verifica se já foi encontrada e se é correta para a palavra.
+            while True:
+                chute = letra()
+                if not chute in tentativas:
+                    if chute in escolha:
+                        if chute in acertos:
+                            print('Letra já encontrada.')
+                        else:
+                            print('Acertou!')
+                            acertos.append(chute)
+                            break
+                    else:
+                        print('Errou!')
+                        vida = vida - 1
+                        print(vida)
+                        break
                 else:
-                    print('Acertou!')
-                    acertos.append(chute)
-                    break
-            else:
-                print('Errou!')
-        #posiciona a letra encontrada no dicionario na posição correta.
-        for LA in acertos:
-            if LA in escolha:
-                for pos, char in enumerate(escolha):
-                    if char == LA:
-                        dicti[pos] = LA 
-        mostrarTraços(dicti)
+                    print('Você já tentou essa letra')
+                tentativas.append(chute)
+            #posiciona a letra encontrada no dicionario na posição correta.
+            for LA in acertos:
+                if LA in escolha:
+                    for pos, char in enumerate(escolha):
+                        if char == LA:
+                            dicti[pos] = LA 
+                
