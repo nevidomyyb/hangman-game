@@ -75,6 +75,7 @@ def startGame(arquivo):
             #faz perder se tiver vida zerada
             if vida <= 0:
                 print(f'{lib.arquivo.vermelho}Você perdeu!{lib.arquivo.original}')
+                print(f'A palavra era: {lib.arquivo.amarelo}*{lib.arquivo.ciano}{escolha}{lib.arquivo.amarelo}*{lib.arquivo.original}')
                 break
             else:
                 mostrarTraços(dicti)
