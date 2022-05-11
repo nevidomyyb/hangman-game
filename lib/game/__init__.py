@@ -2,11 +2,12 @@ import random
 from lib import arquivo
 from string import ascii_lowercase
 
+import lib
+
 validos = ascii_lowercase + ' a'
 
 #escolhe uma palavra aleatória do arquivo de configuração
 def escolherPalavra(arquivo):
-    # system to pick a word from config.txt
     a = open(arquivo, 'rt')
     lista = a.readlines()
     listaR = list()
@@ -39,14 +40,21 @@ def mostrarTraços(dicionario):
         print(f'{c}', end=' ')
     print()
 
+def verificarVitoria(dicionario):
+    lista = list()
+    for c in dicionario.values():
+        lista.append(c)    
+    if "_" in lista:
+        return False
+    else:
+        return True
 
 def startGame(arquivo):
     # start the game
     escolha = escolherPalavra(arquivo)
     dicti = dict()
-    acertos = list()
     tentativas = list()
-    vida = 10
+    vida = 6
     #corrige ESPAÇOS e _ nas palavras
     if escolha.count(' ') > 0:
         tamanho = len(escolha) - escolha.count(' ')
@@ -57,34 +65,41 @@ def startGame(arquivo):
 
     #começa o sistema do jogo
     while True:
-        if vida <= 0:
-            print('Você perdeu!')
+        if verificarVitoria(dicti):
+            print(f'{lib.arquivo.azul}VOCÊ VENCEU!')
+            print(f'{lib.arquivo.verde}PARABÉNS'.center(12))
+            print(f'{lib.arquivo.original}')
             break
         else:
-            mostrarTraços(dicti)
-            #recebe a letra digitada, verifica se já foi encontrada e se é correta para a palavra.
-            while True:
-                chute = letra()
-                if not chute in tentativas:
-                    if chute in escolha:
-                        if chute in acertos:
-                            print('Letra já encontrada.')
-                        else:
+            if vida <= 0:
+                print(f'{lib.arquivo.vermelho}Você perdeu!{lib.arquivo.original}')
+                break
+            else:
+                mostrarTraços(dicti)
+                #recebe a letra digitada, verifica se já foi encontrada e se é correta para a palavra.
+                while True:
+                    chute = letra()
+                    #se a letra n tiver sido tentada vai continuar
+                    if not chute in tentativas:
+                        if chute in escolha:
+                            tentativas.append(chute)
                             print('Acertou!')
-                            acertos.append(chute)
+                            vida = vida + 1
+                            print(f'{lib.arquivo.verde}Vida{lib.arquivo.original}:{lib.arquivo.azul} {vida}{lib.arquivo.original}')
+                            break
+                        else:
+                            tentativas.append(chute)
+                            print('Errou!')
+                            vida = vida - 1
+                            print(f'{lib.arquivo.verde}Vida{lib.arquivo.original}:{lib.arquivo.vermelho} {vida}{lib.arquivo.original}')        
                             break
                     else:
-                        print('Errou!')
-                        vida = vida - 1
-                        print(vida)
+                        print('Letra já tentada')
                         break
-                else:
-                    print('Você já tentou essa letra')
-                tentativas.append(chute)
-            #posiciona a letra encontrada no dicionario na posição correta.
-            for LA in acertos:
-                if LA in escolha:
-                    for pos, char in enumerate(escolha):
-                        if char == LA:
-                            dicti[pos] = LA 
-                
+                #posiciona a letra encontrada no dicionario na posição correta.
+                for LA in tentativas:
+                    if LA in escolha:
+                        for pos, char in enumerate(escolha):
+                            if char == LA:
+                                dicti[pos] = LA 
+                        
