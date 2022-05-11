@@ -40,6 +40,7 @@ def mostrarTraços(dicionario):
         print(f'{c}', end=' ')
     print()
 
+#verifica se o dicionario contém "_" se não, significa que a palavra está completa e venceu a rodada
 def verificarVitoria(dicionario):
     lista = list()
     for c in dicionario.values():
@@ -48,9 +49,8 @@ def verificarVitoria(dicionario):
         return False
     else:
         return True
-
+#função de iniciar o jogo
 def startGame(arquivo):
-    # start the game
     escolha = escolherPalavra(arquivo)
     dicti = dict()
     tentativas = list()
@@ -65,12 +65,14 @@ def startGame(arquivo):
 
     #começa o sistema do jogo
     while True:
+        #verifica se já venceu
         if verificarVitoria(dicti):
             print(f'{lib.arquivo.azul}VOCÊ VENCEU!')
             print(f'{lib.arquivo.verde}PARABÉNS'.center(12))
             print(f'{lib.arquivo.original}')
             break
         else:
+            #faz perder se tiver vida zerada
             if vida <= 0:
                 print(f'{lib.arquivo.vermelho}Você perdeu!{lib.arquivo.original}')
                 break
@@ -79,7 +81,6 @@ def startGame(arquivo):
                 #recebe a letra digitada, verifica se já foi encontrada e se é correta para a palavra.
                 while True:
                     chute = letra()
-                    #se a letra n tiver sido tentada vai continuar
                     if not chute in tentativas:
                         if chute in escolha:
                             tentativas.append(chute)
