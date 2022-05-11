@@ -56,10 +56,7 @@ def startGame(arquivo):
     tentativas = list()
     vida = 6
     #corrige ESPAÇOS e _ nas palavras
-    if escolha.count(' ') > 0:
-        tamanho = len(escolha) - escolha.count(' ')
-    else:
-        tamanho = len(escolha)
+    tamanho = len(escolha)
     #mostra os traços e letras(caso já tenha acertado alguma)
     criarTraços(dicti, tamanho)
 
