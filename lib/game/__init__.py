@@ -1,8 +1,7 @@
-import random
-from lib import arquivo
 from string import ascii_lowercase
-
-import lib
+from lib import arquivo as arcs
+from string import ascii_lowercase
+import random
 
 validos = ascii_lowercase + ' a'
 
@@ -64,15 +63,16 @@ def startGame(arquivo):
     while True:
         #verifica se já venceu
         if verificarVitoria(dicti):
-            print(f'{lib.arquivo.azul}VOCÊ VENCEU!')
-            print(f'{lib.arquivo.verde}PARABÉNS'.center(12))
-            print(f'{lib.arquivo.original}')
+            print(f'{arcs.verde}VOCÊ VENCEU!'.center(48))
+            print(f'{arcs.verde}PARABÉNS'.center(48))
+            print(f'{arcs.original}')
             break
         else:
             #faz perder se tiver vida zerada
             if vida <= 0:
-                print(f'{lib.arquivo.vermelho}Você perdeu!{lib.arquivo.original}')
-                print(f'A palavra era: {lib.arquivo.amarelo}*{lib.arquivo.ciano}{escolha}{lib.arquivo.amarelo}*{lib.arquivo.original}')
+                print(f'{arcs.vermelho}VOCÊ PERDEU!'.center(48))
+                print(f'BOA SORTE DA PRÓXIMA VEZ{arcs.original}'.center(48))
+                
                 break
             else:
                 mostrarTraços(dicti)
@@ -84,13 +84,13 @@ def startGame(arquivo):
                             tentativas.append(chute)
                             print('Acertou!')
                             vida = vida + 1
-                            print(f'{lib.arquivo.verde}Vida{lib.arquivo.original}:{lib.arquivo.azul} {vida}{lib.arquivo.original}')
+                            print(f'{arcs.verde}Vida{arcs.original}:{arcs.azul} {vida}{arcs.original}')
                             break
                         else:
                             tentativas.append(chute)
                             print('Errou!')
                             vida = vida - 1
-                            print(f'{lib.arquivo.verde}Vida{lib.arquivo.original}:{lib.arquivo.vermelho} {vida}{lib.arquivo.original}')        
+                            print(f'{arcs.verde}Vida{arcs.original}:{arcs.vermelho} {vida}{arcs.original}')        
                             break
                     else:
                         print('Letra já tentada')
