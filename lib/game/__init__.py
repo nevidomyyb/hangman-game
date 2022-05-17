@@ -70,10 +70,23 @@ def startGame(arquivo):
         else:
             #faz perder se tiver vida zerada
             if vida <= 0:
-                print(f'{arcs.vermelho}VOCÊ PERDEU!'.center(48))
-                print(f'BOA SORTE DA PRÓXIMA VEZ{arcs.original}'.center(48))
-                
-                break
+                print(''*42)
+                print(f'{arcs.vermelho}SUA VIDA CHEGOU A 0')
+                print(f'{arcs.vermelho}MORTE SÚBITA{arcs.original}')
+                print(''*42)
+                print(f'{arcs.azul}DIGITE A PALAVRA: {arcs.original}')
+                resp = str(input())
+                if not resp == escolha:
+                    print(''*42)
+                    print(f'{arcs.vermelho}VOCÊ PERDEU')
+                    print(f'{arcs.vermelho}BOA SORTE NA PRÓXMA{arcs.original}')
+                    print(f'{arcs.amarelo}A PALAVRA ERA{arcs.azul}: {arcs.original}{escolha}')
+                    break
+                else:
+                    print(''*42)
+                    print(f'{arcs.verde}VOCÊ VENCEU!')
+                    print(f'{arcs.verde}PARABÉNS{arcs.original}')
+                    break
             else:
                 mostrarTraços(dicti)
                 #recebe a letra digitada, verifica se já foi encontrada e se é correta para a palavra.
